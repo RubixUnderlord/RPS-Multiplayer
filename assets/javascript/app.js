@@ -62,6 +62,20 @@ connectionsRef.on("value", function (snapshot) {
     }
 });
 
+$("#something").on("click",function(){
+    database.ref("/player-One").set({
+        wins: 0,
+        losses: 0,
+        ties: 0
+    })
+    database.ref("/player-Two").set({
+        wins: 0,
+        losses: 0,
+        ties: 0
+    })
+});
+
+
 
 $("#rps1").on("click", function () {
     if (player === 0) {
@@ -150,18 +164,19 @@ database.ref("/player-Two/picked").on("value", function (p2) {
 
 
 setInterval(function(){
+    playerOneChoice = "0";
+    playerTwoChoice = "0";
 
 
-
-if (playerOneChoice === "0" || playerTwoChoice === "0") {
-} else if (playerOneChoice === "r" && playerTwoChoice === "s" || playerOneChoice === "p" && playerTwoChoice === "r" || playerOneChoice === "s" && playerTwoChoice === "p") {
-    console.log("player one wins");
+if ((playerOneChoice === "r" && playerTwoChoice === "s" )||( playerOneChoice === "p" && playerTwoChoice === "r" )||( playerOneChoice === "s" && playerTwoChoice === "p")) {
+    console.log("wins");
+    playerOneChoice = "0";
+    playerTwoChoice = "0";
     p1wins++
     p2losses++
     $("#you").text("Player One: " + playerOneChoice);
     $("#other").text("Player Two: " + playerTwoChoice);
-    playerOneChoice = "0";
-    playerTwoChoice = "0";
+
     database.ref("/player-One").set({
         wins: p1wins,
         losses: p1losses,
@@ -172,14 +187,15 @@ if (playerOneChoice === "0" || playerTwoChoice === "0") {
         losses: p2losses,
         ties: p2ties
     })
-} else if (playerOneChoice === "r" && playerTwoChoice === "r" || playerOneChoice === "p" && playerTwoChoice === "p" || playerOneChoice === "s" && playerTwoChoice === "s") {
+} else if (playerOneChoice === playerTwoChoice && playerTwoChoice != "0") {
     console.log("tie");
+    playerOneChoice = "0";
+    playerTwoChoice = "0";
     p1ties++
     p2ties++
     $("#you").text("Player One: " + playerOneChoice);
     $("#other").text("Player Two: " + playerTwoChoice);
-    playerOneChoice = "0";
-    playerTwoChoice = "0";
+
     database.ref("/player-One").set({
         wins: p1wins,
         losses: p1losses,
@@ -190,14 +206,16 @@ if (playerOneChoice === "0" || playerTwoChoice === "0") {
         losses: p2losses,
         ties: p2ties
     })
-} else if (playerOneChoice === "r" && playerTwoChoice === "p" || playerOneChoice === "p" && playerTwoChoice === "r" || playerOneChoice === "s" && playerTwoChoice === "p") {
+} else if(playerOneChoice != "0" && playerTwoChoice != "0"){
     console.log("player two wins");
-    p1losses++
-    p2wins++
-    $("#you").text("Player One: " + playerOneChoice);
-    $("#other").text("Player Two: " + playerTwoChoice);
     playerOneChoice = "0";
     playerTwoChoice = "0";
+    p1losses++
+    p2wins++
+
+    $("#you").text("Player One: " + playerOneChoice);
+    $("#other").text("Player Two: " + playerTwoChoice);
+
     database.ref("/player-One").set({
         wins: p1wins,
         losses: p1losses,
@@ -211,4 +229,4 @@ if (playerOneChoice === "0" || playerTwoChoice === "0") {
 }
 },1000);
 
-
+// if (playerOneChoice === "r" && playerTwoChoice === "p" || playerOneChoice === "p" && playerTwoChoice === "r" || playerOneChoice === "s" && playerTwoChoice === "p") 
