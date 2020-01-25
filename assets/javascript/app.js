@@ -229,4 +229,4 @@ if ((playerOneChoice === "r" && playerTwoChoice === "s" )||( playerOneChoice ===
 }
 },1000);
 
-// if (playerOneChoice === "r" && playerTwoChoice === "p" || playerOneChoice === "p" && playerTwoChoice === "r" || playerOneChoice === "s" && playerTwoChoice === "p") 
+
