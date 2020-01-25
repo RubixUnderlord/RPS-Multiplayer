@@ -36,7 +36,7 @@ $("#setPlayer").on("click", function () {
 });
 $("#setPlayer2").on("click", function () {
     player = $(this).attr("data-player");
-    
+    one = 0;
     player = ("/" + player);
     console.log(player);
     database.ref(player).on("value", function (snapshot) {
@@ -172,17 +172,16 @@ setInterval(function(){
     console.log(playerTwoChoice);
 
 
-if (one === "player-One"){
 
 
 if ((playerOneChoice === "r" && playerTwoChoice === "s" )||( playerOneChoice === "p" && playerTwoChoice === "r" )||( playerOneChoice === "s" && playerTwoChoice === "p")) {
     console.log("wins");
+    $("#you").text("Player One: " + playerOneChoice);
+    $("#other").text("Player Two: " + playerTwoChoice);
     playerOneChoice = "0";
     playerTwoChoice = "0";
     p1wins++
     p2losses++
-    $("#you").text("Player One: " + playerOneChoice);
-    $("#other").text("Player Two: " + playerTwoChoice);
 
     database.ref("/player-One").set({
         wins: p1wins,
@@ -196,12 +195,12 @@ if ((playerOneChoice === "r" && playerTwoChoice === "s" )||( playerOneChoice ===
     })
 } else if (playerOneChoice === playerTwoChoice && playerTwoChoice != "0") {
     console.log("tie");
+    $("#you").text("Player One: " + playerOneChoice);
+    $("#other").text("Player Two: " + playerTwoChoice);
     playerOneChoice = "0";
     playerTwoChoice = "0";
     p1ties++
     p2ties++
-    $("#you").text("Player One: " + playerOneChoice);
-    $("#other").text("Player Two: " + playerTwoChoice);
 
     database.ref("/player-One").set({
         wins: p1wins,
@@ -215,13 +214,12 @@ if ((playerOneChoice === "r" && playerTwoChoice === "s" )||( playerOneChoice ===
     })
 } else if(playerOneChoice != "0" && playerTwoChoice != "0"){
     console.log("player two wins");
+    $("#you").text("Player One: " + playerOneChoice);
+    $("#other").text("Player Two: " + playerTwoChoice);
     playerOneChoice = "0";
     playerTwoChoice = "0";
     p1losses++
     p2wins++
-
-    $("#you").text("Player One: " + playerOneChoice);
-    $("#other").text("Player Two: " + playerTwoChoice);
 
     database.ref("/player-One").set({
         wins: p1wins,
@@ -235,7 +233,7 @@ if ((playerOneChoice === "r" && playerTwoChoice === "s" )||( playerOneChoice ===
     })
 }
 
-}},1000);
+},1000);
 
 
 $("#submit").on("click", function(event){
