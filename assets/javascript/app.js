@@ -164,6 +164,7 @@ database.ref("/player-Two/picked").on("value", function (p2) {
 
 
 setInterval(function(){
+    console.log("hello");
     playerOneChoice = "0";
     playerTwoChoice = "0";
 
@@ -230,3 +231,16 @@ if ((playerOneChoice === "r" && playerTwoChoice === "s" )||( playerOneChoice ===
 },1000);
 
 
+// $("#submit").on("click", function(event){
+//     var name = $("#name").val().trim();
+//     var message = $("#message").val().trim();
+//     database.ref("/conversation").push({
+//         name,message
+//     });
+// });
+// database.ref("/conversation").on("child_added",function(snapshot){
+//     $("#conversation").append($("<p>").text(snapshot.val().name + ": " + snapshot.val().message))
+// },
+// function(error){
+
+// });
