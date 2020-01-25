@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RPS multiplayer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2><span id="win"> Wins: 0 Losses: 0 Ties: 0</span></h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3><span id="you">Player One: </span></h3>
+            </div>
+            <div class="col-md-6">
+                <h3><span id="other">Player Two: </span></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <button id="rps1" data-choice="r">Rock</button>
+            </div>
+            <div class="col-md-4">
+                <button id="rps2" data-choice="p">Paper</button>
+            </div>
+            <div class="col-md-4">
+                <button id="rps3" data-choice="s">Scissors</button>
+            </div>
+        </div>
+
+
+    </div>
+    <div>
+        <button id="setPlayer" data-player="player-One">Set: Player One</button>
+        <button id="setPlayer2" data-player="player-Two">Set: Player Two</button>
+    </div>
+
+    <h1 id="watchers"></h1>
+    <script src="assets/javascript/app.js"></script>
+</body>
+
+</html>
