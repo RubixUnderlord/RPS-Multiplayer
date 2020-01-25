@@ -24,6 +24,7 @@ var p2losses = 0;
 var p2ties = 0;
 $("#setPlayer").on("click", function () {
     player = $(this).attr("data-player");
+    one = player;
     player = ("/" + player);
     console.log(player);
     database.ref(player).on("value", function (snapshot) {
@@ -35,6 +36,7 @@ $("#setPlayer").on("click", function () {
 });
 $("#setPlayer2").on("click", function () {
     player = $(this).attr("data-player");
+    
     player = ("/" + player);
     console.log(player);
     database.ref(player).on("value", function (snapshot) {
@@ -165,8 +167,12 @@ database.ref("/player-Two/picked").on("value", function (p2) {
 
 setInterval(function(){
     console.log("hello");
-    playerOneChoice = "0";
-    playerTwoChoice = "0";
+
+    console.log(playerOneChoice);
+    console.log(playerTwoChoice);
+
+
+if (one === "player-One"){
 
 
 if ((playerOneChoice === "r" && playerTwoChoice === "s" )||( playerOneChoice === "p" && playerTwoChoice === "r" )||( playerOneChoice === "s" && playerTwoChoice === "p")) {
@@ -228,19 +234,20 @@ if ((playerOneChoice === "r" && playerTwoChoice === "s" )||( playerOneChoice ===
         ties: p2ties
     })
 }
-},1000);
+
+}},1000);
 
 
-// $("#submit").on("click", function(event){
-//     var name = $("#name").val().trim();
-//     var message = $("#message").val().trim();
-//     database.ref("/conversation").push({
-//         name,message
-//     });
-// });
-// database.ref("/conversation").on("child_added",function(snapshot){
-//     $("#conversation").append($("<p>").text(snapshot.val().name + ": " + snapshot.val().message))
-// },
-// function(error){
+$("#submit").on("click", function(event){
+    var name = $("#name").val().trim();
+    var message = $("#message").val().trim();
+    database.ref("/conversation").push({
+        name,message
+    });
+});
+database.ref("/conversation").on("child_added",function(snapshot){
+    $("#conversation").append($("<p>").text(snapshot.val().name + ": " + snapshot.val().message))
+},
+function(error){
 
-// });
+});
