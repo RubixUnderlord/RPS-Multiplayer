@@ -22,21 +22,32 @@ var p1ties = 0;
 var p2wins = 0;
 var p2losses = 0;
 var p2ties = 0;
+var selected;
 $("#setPlayer").on("click", function () {
     player = $(this).attr("data-player");
-    one = player;
     player = ("/" + player);
     console.log(player);
-    database.ref(player).on("value", function (snapshot) {
-        p1wins = snapshot.val().wins;
-        p1losses = snapshot.val().losses;
-        p1ties = snapshot.val().ties;
-        $("#win").text("Wins: " + snapshot.val().wins + " Losses: " + snapshot.val().losses + " Ties: " + snapshot.val().ties);
-    })
+    database.ref("/one").on("value", function(snapshot){
+        if(snapshot.val().player != "one"){
+
+            selected = "one";
+            database.ref("/one").set({
+                player: selected
+            });
+            database.ref(player).on("value", function (snapshot) {
+                p1wins = snapshot.val().wins;
+                p1losses = snapshot.val().losses;
+                p1ties = snapshot.val().ties;
+                $("#win").text("Wins: " + snapshot.val().wins + " Losses: " + snapshot.val().losses + " Ties: " + snapshot.val().ties);
+            });
+        }else{
+            console.log(snapshot.val().player);
+        }
+    });
+    
 });
 $("#setPlayer2").on("click", function () {
     player = $(this).attr("data-player");
-    one = 0;
     player = ("/" + player);
     console.log(player);
     database.ref(player).on("value", function (snapshot) {
@@ -44,7 +55,7 @@ $("#setPlayer2").on("click", function () {
         p2losses = snapshot.val().losses;
         p2ties = snapshot.val().ties;
         $("#win").text("Wins: " + snapshot.val().wins + " Losses: " + snapshot.val().losses + " Ties: " + snapshot.val().ties);
-    })
+    });
 });
 
 connectedRef.on("value", function (snap) {
@@ -75,6 +86,9 @@ $("#something").on("click",function(){
         losses: 0,
         ties: 0
     })
+    database.ref("/one").set({
+        plater:0
+    });
 });
 
 
